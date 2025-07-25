@@ -51,5 +51,8 @@ public class Patient {
     @Column(name = "zip_code", length = 10)
     private String zipCode;
 
+    @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Anamnesis anamnesis;
+
 
 }

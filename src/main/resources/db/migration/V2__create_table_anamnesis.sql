@@ -1,0 +1,36 @@
+CREATE TABLE anamnesis (
+    id serial PRIMARY KEY,
+    is_allergic BOOLEAN,
+    allergy VARCHAR(100),
+    footwear_type VARCHAR(50),
+    footwear_size INTEGER,
+    complaint TEXT,
+    has_surgery BOOLEAN,
+    surgery_details TEXT,
+    plays_sports BOOLEAN,
+    sport VARCHAR(50),
+    frequency VARCHAR(50),
+    sport_footwear VARCHAR(50),
+    takes_medication BOOLEAN,
+    medication VARCHAR(100),
+    pregnant BOOLEAN,
+    pain_sensitivity VARCHAR(50),
+    hypertension BOOLEAN,
+    heart_condition BOOLEAN,
+    seizures BOOLEAN,
+    hepatitis BOOLEAN,
+    nephropathy BOOLEAN,
+    dialysis BOOLEAN,
+    varicose_veins BOOLEAN,
+    neuropathy BOOLEAN,
+    smoker BOOLEAN,
+    psoriasis BOOLEAN,
+    cancer_history BOOLEAN,
+    vascular_issue BOOLEAN,
+    pacemaker BOOLEAN,
+
+    patient_id BIGINT NOT NULL UNIQUE,
+
+    CONSTRAINT fk_anamnesis_patient FOREIGN KEY (patient_id) REFERENCES patient(id) ON DELETE CASCADE
+
+);
