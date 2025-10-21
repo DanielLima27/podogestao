@@ -45,39 +45,7 @@ public class MedicalHistoryService {
     public Optional<MedicalHistoryResponse> update(Long id, MedicalHistoryRequest request) {
         return repository.findById(id)
                 .map(history -> {
-                    history.setAllergic(request.allergic());
-
-                    history.setAllergicTo(Boolean.TRUE.equals(request.allergic())
-                            ? request.allergicTo()
-                            : "S/A");
-
-                    history.setFootwearType(request.footwearType());
-                    history.setFootwearNumber(request.footwearNumber());
-                    history.setMainComplaint(request.mainComplaint());
-                    history.setLowerLimbSurgery(request.lowerLimbSurgery());
-                    history.setSurgeryDetails(request.surgeryDetails());
-                    history.setPracticesSports(request.practicesSports());
-                    history.setSportType(request.sportType());
-                    history.setSportFrequency(request.sportFrequency());
-                    history.setSportFootwear(request.sportFootwear());
-                    history.setUsesMedication(request.usesMedication());
-                    history.setMedicationDetails(request.medicationDetails());
-                    history.setPregnant(request.pregnant());
-                    history.setPainSensitivity(request.painSensitivity());
-                    history.setHypertension(request.hypertension());
-                    history.setHeartDisease(request.heartDisease());
-                    history.setSeizures(request.seizures());
-                    history.setHepatitis(request.hepatitis());
-                    history.setKidneyDisease(request.kidneyDisease());
-                    history.setHemodialysis(request.hemodialysis());
-                    history.setVaricoseVeins(request.varicoseVeins());
-                    history.setPeripheralNeuropathy(request.peripheralNeuropathy());
-                    history.setSmoker(request.smoker());
-                    history.setPsoriasis(request.psoriasis());
-                    history.setOncologicalHistory(request.oncologicalHistory());
-                    history.setVascularImpairment(request.vascularImpairment());
-                    history.setPacemakerOrPins(request.pacemakerOrPins());
-
+                    mapper.updateEntity(request, history);
                     repository.save(history);
                     return mapper.toResponse(history);
                 });

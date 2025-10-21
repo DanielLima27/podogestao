@@ -49,4 +49,8 @@ public class MedicalHistory {
     private Boolean oncologicalHistory;
     private Boolean vascularImpairment;
     private Boolean pacemakerOrPins;
+
+    @OneToOne
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
 }

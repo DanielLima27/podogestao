@@ -27,9 +27,7 @@ public class Patient {
     private String phone;
     private String occupation;
 
-
-
-
-
+    @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL)
+    private MedicalHistory medicalHistory;
 
 }

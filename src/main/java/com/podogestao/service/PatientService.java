@@ -3,6 +3,7 @@ package com.podogestao.service;
 import com.podogestao.controller.request.PatientRequest;
 import com.podogestao.controller.response.PatientResponse;
 import com.podogestao.entity.Patient;
+import com.podogestao.mapper.MedicalHistoryMapper;
 import com.podogestao.mapper.PatientMapper;
 import com.podogestao.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,13 +18,14 @@ public class PatientService {
 
     private final PatientRepository repository;
     private final PatientMapper mapper;
+    private final MedicalHistoryMapper historyMapper;
 
 
 
     public PatientResponse create(PatientRequest request) {
-        Patient patient = mapper.toEntity(request);
-        repository.save(patient);
-        return mapper.toResponse(patient);
+        Patient patient = mapper.toEntityWithHistory(request);
+        Patient saved = repository.save(patient);
+        return mapper.toResponse(saved);
     }
 
     public List<PatientResponse> findAllPatients() {
@@ -41,20 +43,10 @@ public class PatientService {
 
     public Optional<PatientResponse> update(Long id, PatientRequest request) {
         return repository.findById(id)
-                .map(patient -> {
-                    patient.setName(request.name());
-                    patient.setBirthDate(request.birthDate());
-                    patient.setAddress(request.address());
-                    patient.setNeighborhood(request.neighborhood());
-                    patient.setCity(request.city());
-                    patient.setZipCode(request.zipCode());
-                    patient.setMaritalStatus(request.maritalStatus());
-                    patient.setPhone(request.phone());
-                    patient.setEmail(request.email());
-                    patient.setOccupation(request.occupation());
-
-                    repository.save(patient);
-                    return mapper.toResponse(patient);
+                .map(existing -> {
+                    mapper.updateEntity(request, existing, historyMapper);
+                    Patient updated = repository.save(existing);
+                    return mapper.toResponse(updated);
                 });
     }
 

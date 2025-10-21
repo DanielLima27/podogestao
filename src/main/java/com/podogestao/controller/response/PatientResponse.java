@@ -15,7 +15,8 @@ public record PatientResponse(
     String maritalStatus,
     String email,
     String phone,
-    String occupation
+    String occupation,
+    MedicalHistoryResponse medicalHistory
 
 ) {
 }

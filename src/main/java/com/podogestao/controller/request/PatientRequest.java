@@ -16,7 +16,7 @@ public record PatientRequest(
     String maritalStatus,
     String email,
     String phone,
-    String occupation
-
+    String occupation,
+    MedicalHistoryRequest medicalHistory
 ) {
 }
