@@ -53,4 +53,8 @@ public class MedicalHistory {
     @OneToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "professional_observations_id")
+    private ProfessionalObservations professionalObservations;
 }

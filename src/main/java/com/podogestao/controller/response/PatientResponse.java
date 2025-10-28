@@ -6,7 +6,7 @@ public record PatientResponse(
 
     Long id,
     String name,
-    @JsonFormat(pattern = "dd/MM/yyyy")
+        @JsonFormat(pattern = "dd/MM/yyyy")
     String birthDate,
     String address,
     String neighborhood,
