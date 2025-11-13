@@ -1,10 +1,13 @@
 package com.podogestao.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -29,5 +32,9 @@ public class Patient {
 
     @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL)
     private MedicalHistory medicalHistory;
+
+    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    private List<PatientImages> images = new ArrayList<>();
 
 }
